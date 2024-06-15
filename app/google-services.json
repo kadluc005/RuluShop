@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "503672159515",
+    "project_id": "rulushop-69d7a",
+    "storage_bucket": "rulushop-69d7a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:503672159515:android:f324ca0d996849b29b67be",
+        "android_client_info": {
+          "package_name": "com.example.rulushop"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB7vPRX9iZS5XT1ro8hmfXCAcy84Q38FUU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
