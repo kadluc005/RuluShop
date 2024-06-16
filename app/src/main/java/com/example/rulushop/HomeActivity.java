@@ -32,13 +32,29 @@ public class HomeActivity extends AppCompatActivity {
         binding = ActivityHomeBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
+        // Assurez-vous que l'ID "main" est bien défini dans le layout XML
+        View mainView = findViewById(R.id.main);
+
+        // Suppression de la vérification de nullité
+        ViewCompat.setOnApplyWindowInsetsListener(mainView, (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+        /*super.onCreate(savedInstanceState);
+        EdgeToEdge.enable(this);*/
 
-        ImageSlider imageSlider = binding.imageSlider;
+        // Utilisation correcte de ViewBinding
+        /*binding = ActivityHomeBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());*/
+
+        /*ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
+            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
+            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
+            return insets;
+        });*/
+
+        ImageSlider imageSlider = binding.slider;
         ArrayList<SlideModel> slideModels = new ArrayList<>();
         slideModels.add(new SlideModel(R.drawable.iphone151, ScaleTypes.FIT));
         slideModels.add(new SlideModel(R.drawable.watch, ScaleTypes.FIT));
@@ -46,7 +62,7 @@ public class HomeActivity extends AppCompatActivity {
 
         imageSlider.setImageList(slideModels, ScaleTypes.FIT);
 
-        String[] flowerName = {"Rose", "Lotus", "Lily", "Jasmine", "Ruth"};
+        /*String[] flowerName = {"Rose", "Lotus", "Lily", "Jasmine", "Ruth"};
         int[] flowerImages = {R.drawable.a, R.drawable.b, R.drawable.c, R.drawable.d, R.drawable.f};
 
         GridAdapter gridAdapter = new GridAdapter(HomeActivity.this, flowerName, flowerImages);
@@ -57,6 +73,6 @@ public class HomeActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Toast.makeText(HomeActivity.this, "You Clicked on " + flowerName[position], Toast.LENGTH_SHORT).show();
             }
-        });
+        });*/
     }
 }
