@@ -1,6 +1,8 @@
 package com.example.rulushop;
 
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
@@ -32,11 +34,13 @@ public class DetailActivity extends AppCompatActivity {
         TextView descriptionTxt = findViewById(R.id.textView10);
         RatingBar ratingBar = findViewById(R.id.ratingBar2);
         ImageView imageView = findViewById(R.id.image_detail);
+        Button addToCartBtn = findViewById(R.id.addToCart);
 
         Glide.with(this).load(image).into(imageView);
         titleTxt.setText(title);
         priceTxt.setText(price);
         descriptionTxt.setText(description);
         ratingBar.setRating(rating);
+
     }
 }
