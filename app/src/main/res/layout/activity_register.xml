@@ -42,6 +42,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:drawableStart="@drawable/email"
+                android:id="@+id/email_txt"
                 android:drawablePadding="5dp">
 
             </com.google.android.material.textfield.TextInputEditText>
@@ -49,26 +50,7 @@
 
         </com.google.android.material.textfield.TextInputLayout>
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="25dp"
-            android:hint="Username"
-            app:boxCornerRadiusBottomEnd="15dp"
-            app:boxCornerRadiusBottomStart="15dp"
-            app:boxCornerRadiusTopEnd="15dp"
-            app:boxCornerRadiusTopStart="15dp"
-            app:hintTextColor="@color/black">
-            <com.google.android.material.textfield.TextInputEditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:drawableStart="@drawable/username"
-                android:drawablePadding="5dp">
 
-            </com.google.android.material.textfield.TextInputEditText>
-
-
-        </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
@@ -85,6 +67,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:drawableStart="@drawable/password"
+                android:id="@+id/password_txt"
                 android:drawablePadding="5dp">
             </com.google.android.material.textfield.TextInputEditText>
 
@@ -105,18 +88,21 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:drawableStart="@drawable/password"
+                android:id="@+id/password_confirm_txt"
                 android:drawablePadding="5dp">
             </com.google.android.material.textfield.TextInputEditText>
 
         </com.google.android.material.textfield.TextInputLayout>
 
         <Button
+            android:id="@+id/register_btn"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:text="S'inscrire"
             android:backgroundTint="@color/grey"
-            android:textColor="@color/white"
-            />
+            android:textColor="@color/white">
+
+        </Button>
 
         <TextView
             android:layout_width="wrap_content"
@@ -137,6 +123,7 @@
             android:orientation="horizontal">
 
             <ImageButton
+                android:id="@+id/google_login"
                 android:layout_width="60dp"
                 android:layout_height="60dp"
                 android:layout_margin="10dp"
@@ -174,7 +161,7 @@
                 android:id="@+id/textClickable"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Connectez vous"
+                android:text=" Connectez vous"
                 android:textColor="@color/grey"
                 android:textSize="16sp"
                 android:clickable="true"
