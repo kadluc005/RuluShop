@@ -8,4 +8,5 @@
     <color name="purple_dark">#7C1C7D</color> <!-- Exemple de couleur violette plus foncée -->
     <color name="lightGrey">#EFEFEF</color>
     <color name="orange">#FFA500</color>
+    <color name="red">#FF0000</color>
 </resources>

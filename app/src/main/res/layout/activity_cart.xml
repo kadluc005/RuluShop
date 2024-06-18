@@ -28,7 +28,7 @@
         app:layout_constraintEnd_toEndOf="parent">
 
         <ImageView
-            android:id="@+id/imageView6"
+            android:id="@+id/back_img"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
@@ -40,13 +40,13 @@
             android:id="@+id/textView5"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="84dp"
             android:layout_marginTop="32dp"
-            android:text="My Cart"
+            android:text="Mon panier"
             android:textColor="@color/black"
             android:textSize="22sp"
             android:textStyle="bold"
-            app:layout_constraintStart_toEndOf="@+id/imageView6"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -86,19 +86,18 @@
                     android:layout_weight="1"
                     android:background="#00ffffff"
                     android:ems="10"
-                    android:hint="Enter Your Coupon"
+                    android:hint="Entrer un coupon de réduction"
                     android:inputType="text"
                     android:paddingStart="8dp"
                     android:textSize="14sp" />
 
                 <Button
                     android:id="@+id/button2"
-                    style="@android:style/Widget.Button"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_weight="0"
-                    android:background="@drawable/grey_button_bg"
-                    android:text="Apply"
+                    android:backgroundTint="@color/orange"
+                    android:text="Appliquer"
                     android:textColor="@color/white"
                     android:textSize="16sp" />
             </LinearLayout>
@@ -124,7 +123,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
-                    android:text="$-"
+                    android:text="F CFA"
                     android:textColor="@color/black"
                     android:textSize="16sp"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -146,7 +145,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
-                    android:text="$-"
+                    android:text="F CFA"
                     android:textColor="@color/black"
                     android:textSize="16sp"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -168,7 +167,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
-                    android:text="$-"
+                    android:text="F CFA"
                     android:textColor="@color/black"
                     android:textSize="16sp"
                     android:textStyle="bold"
@@ -201,7 +200,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
-                    android:text="$-"
+                    android:text="F CFA"
                     android:textColor="@color/black"
                     android:textSize="16sp"
                     android:textStyle="bold"
@@ -216,7 +215,7 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginEnd="16dp"
                 android:layout_marginTop="16dp"
-                android:background="@drawable/grey_background2"
+                android:backgroundTint="@color/orange"
                 android:text="Check Out"
                 android:textColor="@color/white"
                 android:textSize="18sp" />

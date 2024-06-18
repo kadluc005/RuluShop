@@ -6,6 +6,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -16,11 +17,14 @@ import androidx.core.view.WindowInsetsCompat;
 import com.bumptech.glide.Glide;
 
 public class DetailActivity extends AppCompatActivity {
+    private CartManager cartManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
+
+        cartManager = new CartManager(this);
 
         String image = getIntent().getStringExtra("image");
         String title = getIntent().getStringExtra("title");
@@ -42,5 +46,26 @@ public class DetailActivity extends AppCompatActivity {
         descriptionTxt.setText(description);
         ratingBar.setRating(rating);
 
+        ImageView img = findViewById(R.id.back_btn);
+        img.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+
+        addToCartBtn.setOnClickListener(v -> {
+            CartItem cartItem = new CartItem(title, parsePrice(price), 1, image);
+            cartManager.addItemToCart(cartItem);
+            Toast.makeText(this, "Produit ajouté au panier", Toast.LENGTH_SHORT).show();
+        });
+
+    }
+
+    private double parsePrice(String price) throws NumberFormatException {
+        // Replace comma with dot
+        String normalizedPrice = price.replace(",", ".");
+        normalizedPrice = normalizedPrice.replace(" F CFA", "");
+        return Double.parseDouble(normalizedPrice);
     }
 }

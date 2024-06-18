@@ -1,12 +1,10 @@
 package com.example.rulushop;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.GridView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
-
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -92,5 +90,14 @@ public class HomeActivity extends AppCompatActivity {
                 Toast.makeText(HomeActivity.this, error.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
+        binding.cart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(HomeActivity.this, CartActivity.class));
+            }
+        });
+    }
+    public List getProductList(){
+        return productList;
     }
 }

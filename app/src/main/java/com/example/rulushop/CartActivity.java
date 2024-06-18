@@ -2,6 +2,9 @@ package com.example.rulushop;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
@@ -12,14 +15,19 @@ import androidx.core.view.WindowInsetsCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+
 import java.util.List;
 
 public class CartActivity extends AppCompatActivity {
 
     private RecyclerView cartRecyclerView;
+    private TextView totalTxt, subtotalTxt, deliveryTxt, taxTxt, emptyCartTxt, removeCartTxt;
+    private EditText couponEditText;
+    private Button applyCouponButton, checkOutBtn;
+    private CartManager cartManager;
     private CartAdapter cartAdapter;
-    private TextView totalTxt;
-    private TextView emptyCartTxt;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,22 +39,31 @@ public class CartActivity extends AppCompatActivity {
             return insets;
         });
 
+        ImageView img = findViewById(R.id.back_img);
+        img.setOnClickListener(v -> finish());
+
         cartRecyclerView = findViewById(R.id.cartView);
         totalTxt = findViewById(R.id.totaltTxt);
+        subtotalTxt = findViewById(R.id.totalFeetTxt);
+        deliveryTxt = findViewById(R.id.deliveryTxt);
+        taxTxt = findViewById(R.id.taxTxt);
         emptyCartTxt = findViewById(R.id.textView4);
+        couponEditText = findViewById(R.id.editTextText2);
+        applyCouponButton = findViewById(R.id.button2);
+        checkOutBtn = findViewById(R.id.checkOutBtn);
 
-        // Récupération des articles du panier
-        List<CartItem> cartItems = CartManager.getInstance().getCartItems();
+        // Initialize CartManager
+        cartManager = new CartManager(this);
 
-        // Initialisation de l'adaptateur et configuration du RecyclerView
-        cartAdapter = new CartAdapter(this, cartItems);
+        // Setup RecyclerView
         cartRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+        // Fetch cart items
+        List<CartItem> cartItems = getCartItems();
+        cartAdapter = new CartAdapter(cartItems);
         cartRecyclerView.setAdapter(cartAdapter);
 
-        // Mise à jour du prix total
-        updateTotalPrice();
-
-        // Affichage d'un message si le panier est vide
+        // Check if cart is empty
         if (cartItems.isEmpty()) {
             emptyCartTxt.setVisibility(View.VISIBLE);
             cartRecyclerView.setVisibility(View.GONE);
@@ -54,10 +71,86 @@ public class CartActivity extends AppCompatActivity {
             emptyCartTxt.setVisibility(View.GONE);
             cartRecyclerView.setVisibility(View.VISIBLE);
         }
+
+        // Update total amounts
+        updateTotals(cartItems);
+
+        // Apply coupon
+        applyCouponButton.setOnClickListener(v -> applyCoupon(couponEditText.getText().toString()));
+
+        // Checkout button
+        checkOutBtn.setOnClickListener(v -> checkOut());
     }
 
-    private void updateTotalPrice() {
-        double totalPrice = CartManager.getInstance().getTotalPrice();
-        totalTxt.setText(String.format("$%.2f", totalPrice));
+    private List<CartItem> getCartItems() {
+        return cartManager.getCartItems();
     }
+
+    public void updateTotals(List<CartItem> cartItems) {
+        double subtotal = 0.0;
+        for (CartItem item : cartItems) {
+            subtotal += item.getPrice() * item.getQuantity();
+        }
+        double delivery = calculateDelivery(subtotal);
+        double tax = calculateTax(subtotal);
+        double total = subtotal + delivery + tax;
+
+        subtotalTxt.setText(String.format("F CFA %.2f", subtotal));
+        deliveryTxt.setText(String.format("F CFA %.2f", delivery));
+        taxTxt.setText(String.format("F CFA %.2f", tax));
+        totalTxt.setText(String.format("F CFA %.2f", total));
+    }
+
+    private double calculateDelivery(double subtotal) {
+        return 50.0;
+    }
+
+    private double calculateTax(double subtotal) {
+        return subtotal * 0.18;
+    }
+
+    private void applyCoupon(String couponCode) {
+        // Replace with your coupon application logic
+        if ("DISCOUNT10".equals(couponCode)) {
+            // Apply 10% discount
+            List<CartItem> cartItems = getCartItems();
+            double subtotal = 0.0;
+            for (CartItem item : cartItems) {
+                subtotal += item.getPrice() * item.getQuantity();
+            }
+            double discount = subtotal * 0.10;
+            double totalAfterDiscount = subtotal - discount;
+            subtotalTxt.setText(String.format("F CFA %.2f", totalAfterDiscount));
+        }
+    }
+
+    private void checkOut() {
+        // Replace with your checkout logic
+    }
+
+    public void removeCartItem(int position) {
+        List<CartItem> cartItems = getCartItems();
+
+        if (position >= 0 && position < cartItems.size()) {
+            cartItems.remove(position); // Supprime l'élément à la position donnée
+
+            // Mettre à jour les préférences partagées, la base de données, ou tout autre moyen de stockage des données du panier
+            //saveCartItems(cartItems); // Exemple fictif de méthode pour enregistrer les modifications du panier
+
+            // Mettre à jour l'interface utilisateur
+            if (cartItems.isEmpty()) {
+                emptyCartTxt.setVisibility(View.VISIBLE);
+                cartRecyclerView.setVisibility(View.GONE);
+            } else {
+                emptyCartTxt.setVisibility(View.GONE);
+                cartRecyclerView.setVisibility(View.VISIBLE);
+            }
+
+            updateTotals(cartItems); // Méthode pour mettre à jour les totaux du panier
+
+            // Notifier l'adaptateur que l'article a été supprimé
+            cartAdapter.notifyItemRemoved(position);
+        }
+    }
+
 }
