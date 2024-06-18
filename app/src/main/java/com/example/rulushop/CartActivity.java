@@ -1,5 +1,6 @@
 package com.example.rulushop;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -125,7 +126,7 @@ public class CartActivity extends AppCompatActivity {
     }
 
     private void checkOut() {
-        // Replace with your checkout logic
+        startActivity(new Intent(CartActivity.this, PaiementActivity.class));
     }
 
     public void removeCartItem(int position) {
