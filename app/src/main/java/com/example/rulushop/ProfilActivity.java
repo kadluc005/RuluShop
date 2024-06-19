@@ -15,6 +15,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.bumptech.glide.Glide;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
@@ -26,12 +27,21 @@ public class ProfilActivity extends AppCompatActivity {
     private TextView emailTextView;
     private ImageView profileImage;
     private Button logoutButton;
+    private ImageView back;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profil);
 
+
+        back = findViewById(R.id.back_button);
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
         // Trouver les références des vues
         profileImage = findViewById(R.id.profile_image);
         usernameTextView = findViewById(R.id.username);
@@ -46,10 +56,18 @@ public class ProfilActivity extends AppCompatActivity {
             String username = user.getDisplayName();
             // Email de l'utilisateur connecté
             String email = user.getEmail();
+            Uri photoUrl = user.getPhotoUrl();
 
             // Afficher les informations dans les TextView appropriés
-            usernameTextView.setText(username);
+            usernameTextView.setText(user.getDisplayName());
             emailTextView.setText(email);
+            if (photoUrl != null) {
+                Glide.with(this)
+                        .load(photoUrl)
+                        .into(profileImage);
+            } else {
+                profileImage.setImageResource(R.drawable.btn_4); // Image par défaut
+            }
         }
 
         // Ajouter un OnClickListener au bouton de déconnexion

@@ -136,7 +136,7 @@ public class CartActivity extends AppCompatActivity {
             cartItems.remove(position); // Supprime l'élément à la position donnée
 
             // Mettre à jour les préférences partagées, la base de données, ou tout autre moyen de stockage des données du panier
-            //saveCartItems(cartItems); // Exemple fictif de méthode pour enregistrer les modifications du panier
+            cartManager.saveCartItems(cartItems); // Exemple fictif de méthode pour enregistrer les modifications du panier
 
             // Mettre à jour l'interface utilisateur
             if (cartItems.isEmpty()) {

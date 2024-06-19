@@ -6,7 +6,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/grey_background"
+    android:background="@color/white"
     tools:context=".ProfilActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -75,22 +75,26 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent">
 
-            <EditText
+            <TextView
                 android:id="@+id/username"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Username"
-                android:inputType="textPersonName"
+                android:inputType="text"
                 android:text="Amanda Jane"
+                android:textSize="18sp"
+                android:textColor="@color/black"
                 android:layout_marginBottom="8dp" />
 
-            <EditText
+            <TextView
                 android:id="@+id/email"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Email"
                 android:inputType="textEmailAddress"
-                android:text="amanda@gmail.com" />
+                android:text="amanda@gmail.com"
+                android:textSize="18sp"
+                android:textColor="@color/black"/>
         </LinearLayout>
 
         <Button

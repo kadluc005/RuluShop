@@ -76,4 +76,8 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
         }
 
     }
+    public void filterList(List<Product> filteredList) {
+        this.productList = filteredList;
+        notifyDataSetChanged();
+    }
 }

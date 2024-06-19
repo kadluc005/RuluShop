@@ -25,7 +25,7 @@ import retrofit2.Response;
 
 public class PaiementActivity extends AppCompatActivity {
 
-    private static final String BASE_URL = "https://paygateglobal.com/v1/page/";
+    private static final String BASE_URL = "https://paygateglobal.com/";
     private static final String API_KEY = "0f693398-5854-4abe-9739-4219bc2f800b";
     private static final int REQUEST_CALL_PERMISSION = 1;
 
@@ -44,7 +44,7 @@ public class PaiementActivity extends AppCompatActivity {
 
     private void initiatePayment() {
         String phoneNumber = phoneNumberTextView.getText().toString();
-        double amount = 1.00; // Montant à ajuster selon vos besoins
+        double amount = 1.00;
         String description = "Achat de produits";
         String identifier = "unique_transaction_id";
         String network = "TMONEY"; // ou "FLOOZ" selon votre choix

@@ -30,7 +30,7 @@ public class CartManager {
         return new Gson().fromJson(cartItemsJson, new TypeToken<List<CartItem>>(){}.getType());
     }
 
-    private void saveCartItems(List<CartItem> cartItems) {
+    public void saveCartItems(List<CartItem> cartItems) {
         String cartItemsJson = new Gson().toJson(cartItems);
         sharedPreferences.edit().putString(CART_ITEMS_KEY, cartItemsJson).apply();
     }

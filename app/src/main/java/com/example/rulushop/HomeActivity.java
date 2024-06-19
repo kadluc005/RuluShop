@@ -1,8 +1,13 @@
 package com.example.rulushop;
 
+import static java.util.Locale.filter;
+
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -24,6 +29,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class HomeActivity extends AppCompatActivity {
 
@@ -100,15 +106,12 @@ public class HomeActivity extends AppCompatActivity {
                     }
                 }
                 adapter.notifyDataSetChanged(); // Met à jour l'UI avec les nouveaux produits
-                // Cacher la ProgressBar une fois les données chargées
                 findViewById(R.id.progressBarPopular).setVisibility(View.GONE);
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-                // Afficher un message d'erreur en cas d'échec de récupération des données
                 Toast.makeText(HomeActivity.this, "Échec du chargement des produits : " + error.getMessage(), Toast.LENGTH_SHORT).show();
-                // Cacher la ProgressBar en cas d'erreur
                 findViewById(R.id.progressBarPopular).setVisibility(View.GONE);
             }
         });
@@ -118,8 +121,34 @@ public class HomeActivity extends AppCompatActivity {
                 startActivity(new Intent(HomeActivity.this, CartActivity.class));
             }
         });
+        EditText searchEditText = findViewById(R.id.editTextText);
+
+        // Ajouter un TextWatcher à l'EditText pour écouter les changements de texte
+        searchEditText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                filter(s.toString());
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                // Rien à faire après le changement de texte
+            }
+        });
     }
     public List getProductList(){
         return productList;
+    }
+
+    private void filter(String text) {
+        List<Product> filteredList = productList.stream()
+                .filter(product -> product.getTitle().toLowerCase().contains(text.toLowerCase()))
+                .collect(Collectors.toList());
+
+        adapter.filterList(filteredList);
     }
 }
